@@ -19,3 +19,5 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
+
+// ddeployment through "Heroku"
