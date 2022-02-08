@@ -3,13 +3,13 @@ import "firebase/compat/firestore";
 import "firebase/compat/auth";
 
 const config = {
-  apiKey: "AIzaSyCm26rsOucbZXdEOJu59w2em7DQIxb3ubA",
-  authDomain: "wardrobe-26a7d.firebaseapp.com",
-  projectId: "wardrobe-26a7d",
-  storageBucket: "wardrobe-26a7d.appspot.com",
-  messagingSenderId: "768429712284",
-  appId: "1:768429712284:web:f4741f3961f64d67241e59",
-  measurementId: "G-2L24E5MFND",
+  apiKey: 'AIzaSyCdHT-AYHXjF7wOrfAchX4PIm3cSj5tn14',
+  authDomain: 'crwn-db.firebaseapp.com',
+  databaseURL: 'https://crwn-db.firebaseio.com',
+  projectId: 'crwn-db',
+  storageBucket: 'crwn-db.appspot.com',
+  messagingSenderId: '850995411664',
+  appId: '1:850995411664:web:7ddc01d597846f65'
 };
 
 firebase.initializeApp(config);
@@ -62,7 +62,7 @@ export const convertCollectionSnapshotToMap = collections => {
       routeName: encodeURI(title.toLowerCase()),
       id: doc.id,
       title,
-      items,
+      items
     };
   });
 
@@ -72,11 +72,20 @@ export const convertCollectionSnapshotToMap = collections => {
   }, {});
 };
 
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged(userAuth => {
+      unsubscribe();
+      resolve(userAuth);
+    }, reject);
+  })
+};
+
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
-const provider = new firebase.auth.GoogleAuthProvider();
-provider.setCustomParameters({ prompt: "select_account" });
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
+export const googleProvider = new firebase.auth.GoogleAuthProvider();
+googleProvider.setCustomParameters({ prompt: 'select_account' });
+export const signInWithGoogle = () => auth.signInWithPopup(googleProvider);
 
 export default firebase;
