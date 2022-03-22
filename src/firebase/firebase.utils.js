@@ -29,10 +29,10 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         displayName,
         email,
         createdAt,
-        ...additionalData,
+        ...additionalData
       });
     } catch (error) {
-      console.log("error creating user", error.message);
+      console.log('error creating user', error.message);
     }
   }
 
@@ -78,7 +78,7 @@ export const getCurrentUser = () => {
       unsubscribe();
       resolve(userAuth);
     }, reject);
-  })
+  });
 };
 
 export const auth = firebase.auth();
